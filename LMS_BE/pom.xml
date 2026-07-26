@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="
+            http://maven.apache.org/POM/4.0.0
+            https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- =====================================================
+         SPRING BOOT PARENT
+         Quản lý version cho các thư viện Spring, Hibernate,
+         Jackson, MariaDB, Lombok, JUnit...
+         ===================================================== -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>4.1.0</version>
+        <relativePath/>
+    </parent>
+
+    <!-- =====================================================
+         THÔNG TIN DỰ ÁN
+         ===================================================== -->
+    <groupId>com.example</groupId>
+    <artifactId>lms-be</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+
+    <name>LMS Backend</name>
+
+    <description>
+        Backend ứng dụng quản lý khóa học online LMS Mini
+    </description>
+
+    <!-- =====================================================
+         VERSION
+         ===================================================== -->
+    <properties>
+        <java.version>21</java.version>
+
+        <mapstruct.version>1.6.3</mapstruct.version>
+        <lombok-mapstruct-binding.version>
+            0.2.0
+        </lombok-mapstruct-binding.version>
+
+        <apache-poi.version>5.5.1</apache-poi.version>
+        <jacoco.version>0.8.12</jacoco.version>
+    </properties>
+
+    <dependencies>
+
+        <!-- =================================================
+             1. SPRING WEB
+
+             Dùng để xây dựng REST API:
+             - @RestController
+             - @RequestMapping
+             - @GetMapping
+             - @PostMapping
+             - @PutMapping
+             - @DeleteMapping
+             - @RequestBody
+             - MultipartFile
+             - Jackson JSON
+             - Embedded Tomcat
+             ================================================= -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>
+                spring-boot-starter-web
+            </artifactId>
+        </dependency>
+
+        <!-- =================================================
+             2. SPRING DATA JPA
+
+             Bao gồm:
+             - Hibernate ORM
+             - JpaRepository
+             - EntityManager
+             - @Entity
+             - @OneToMany
+             - @ManyToOne
+             - @ManyToMany
+             - Transaction
+             ================================================= -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>
+                spring-boot-starter-data-jpa
+            </artifactId>
+        </dependency>
+
+        <!-- =================================================
+             3. VALIDATION
+
+             Dùng:
+             - @Valid
+             - @NotNull
+             - @NotBlank
+             - @Size
+             - @Email
+             - @Min
+             - @Max
+             - Custom Validator
+             ================================================= -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>
+                spring-boot-starter-validation
+            </artifactId>
+        </dependency>
+
+        <!-- =================================================
+             4. MARIADB DRIVER
+
+             Driver kết nối MariaDB.
+             Chỉ cần khi chạy ứng dụng nên dùng runtime.
+             ================================================= -->
+        <dependency>
+            <groupId>org.mariadb.jdbc</groupId>
+            <artifactId>mariadb-java-client</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!-- =================================================
+             5. LOMBOK
+
+             Dùng:
+             - @Getter
+             - @Setter
+             - @Data
+             - @Builder
+             - @RequiredArgsConstructor
+             - @NoArgsConstructor
+             - @AllArgsConstructor
+             ================================================= -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- =================================================
+             6. MAPSTRUCT
+
+             Chuyển đổi:
+             - Entity -> Response DTO
+             - Request DTO -> Entity
+             - Update DTO -> Entity hiện tại
+             ================================================= -->
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct</artifactId>
+            <version>${mapstruct.version}</version>
+        </dependency>
+
+        <!-- =================================================
+             7. APACHE POI
+
+             Dùng để:
+             - Xuất Excel học viên
+             - Xuất Excel khóa học
+             - Tạo file .xlsx
+             ================================================= -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>${apache-poi.version}</version>
+        </dependency>
+
+        <!-- =================================================
+             8. ACTUATOR
+
+             Theo dõi trạng thái ứng dụng:
+             - /actuator/health
+             - /actuator/info
+             - metrics
+             ================================================= -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>
+                spring-boot-starter-actuator
+            </artifactId>
+        </dependency>
+
+        <!-- =================================================
+             9. DEVTOOLS
+
+             Tự khởi động lại ứng dụng khi sửa code.
+             Chỉ phục vụ phát triển.
+             ================================================= -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>
+                spring-boot-devtools
+            </artifactId>
+            <scope>runtime</scope>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- =================================================
+             10. TEST
+
+             Bao gồm:
+             - JUnit
+             - Mockito
+             - AssertJ
+             - Spring Boot Test
+             - MockMvc
+             ================================================= -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>
+                spring-boot-starter-test
+            </artifactId>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+
+            <!-- =================================================
+                 MAVEN COMPILER PLUGIN
+
+                 Cấu hình annotation processor cho:
+                 - Lombok
+                 - MapStruct
+                 ================================================= -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>
+                    maven-compiler-plugin
+                </artifactId>
+
+                <configuration>
+                    <release>${java.version}</release>
+
+                    <parameters>true</parameters>
+
+                    <annotationProcessorPaths>
+
+                        <!-- Lombok tạo getter, setter, constructor... -->
+                        <path>
+                            <groupId>
+                                org.projectlombok
+                            </groupId>
+                            <artifactId>
+                                lombok
+                            </artifactId>
+                        </path>
+
+                        <!--
+                            Cho phép MapStruct hoạt động đúng với
+                            getter/setter do Lombok sinh ra
+                        -->
+                        <path>
+                            <groupId>
+                                org.projectlombok
+                            </groupId>
+                            <artifactId>
+                                lombok-mapstruct-binding
+                            </artifactId>
+                            <version>
+                                ${lombok-mapstruct-binding.version}
+                            </version>
+                        </path>
+
+                        <!-- Sinh class MapperImpl -->
+                        <path>
+                            <groupId>
+                                org.mapstruct
+                            </groupId>
+                            <artifactId>
+                                mapstruct-processor
+                            </artifactId>
+                            <version>
+                                ${mapstruct.version}
+                            </version>
+                        </path>
+
+                    </annotationProcessorPaths>
+
+                    <compilerArgs>
+                        <!--
+                            Mapper được sinh sẽ có:
+                            @Component
+                            để Spring có thể inject
+                        -->
+                        <arg>
+                            -Amapstruct.defaultComponentModel=spring
+                        </arg>
+
+                        <!--
+                            Báo lỗi nếu DTO và Entity có field
+                            chưa được ánh xạ
+                        -->
+                        <arg>
+                            -Amapstruct.unmappedTargetPolicy=ERROR
+                        </arg>
+                    </compilerArgs>
+                </configuration>
+            </plugin>
+
+            <!-- =================================================
+                 JACOCO
+
+                 Đo độ bao phủ của unit test.
+                 Sau khi chạy mvn test, báo cáo nằm tại:
+                 target/site/jacoco/index.html
+                 ================================================= -->
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>
+                    jacoco-maven-plugin
+                </artifactId>
+                <version>${jacoco.version}</version>
+
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+
+                    <execution>
+                        <id>jacoco-report</id>
+                        <phase>test</phase>
+
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- =================================================
+                 SPRING BOOT MAVEN PLUGIN
+
+                 Chạy:
+                 mvn spring-boot:run
+
+                 Đóng gói:
+                 mvn clean package
+
+                 Chạy JAR:
+                 java -jar target/lms-be-0.0.1-SNAPSHOT.jar
+                 ================================================= -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>
+                    spring-boot-maven-plugin
+                </artifactId>
+
+                <configuration>
+                    <!-- Lombok không cần nằm trong file JAR -->
+                    <excludes>
+                        <exclude>
+                            <groupId>
+                                org.projectlombok
+                            </groupId>
+                            <artifactId>
+                                lombok
+                            </artifactId>
+                        </exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
+
+</project>

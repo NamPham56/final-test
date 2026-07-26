@@ -1,0 +1,45 @@
+# Only keep the two LMS application directories in the root repository.
+/*
+!/.gitignore
+!/LMS_BE/
+!/buildadmin/
+
+# Local backup of nested Git metadata; never commit it.
+/.git-backups/
+
+# Frontend dependencies and generated bundles.
+**/node_modules/
+**/dist/
+**/dist-ssr/
+**/.vite/
+**/.cache/
+**/coverage/
+
+# Backend build output and runtime uploads.
+**/target/
+**/build/
+**/out/
+**/uploads/
+**/logs/
+*.log
+
+# Local environment files and credentials.
+**/.env
+**/.env.*
+!**/.env.example
+
+# BuildAdmin's Vite environment files contain only public build settings
+# and are required when the frontend is cloned on another machine.
+!/buildadmin/web/.env
+!/buildadmin/web/.env.development
+!/buildadmin/web/.env.production
+
+# IDE and operating-system files.
+**/.idea/
+**/.vscode/
+**/.settings/
+**/.classpath
+**/.project
+**/.DS_Store
+**/Desktop.ini
+**/Thumbs.db

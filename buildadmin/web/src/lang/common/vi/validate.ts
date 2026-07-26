@@ -1,0 +1,15 @@
+export default {
+    'Captcha loading failed, please click refresh button': 'Tải mã xác minh thất bại, vui lòng làm mới',
+    'The correct area is not clicked, please try again!': 'Vị trí chọn chưa đúng, vui lòng thử lại!',
+    'Verification is successful!': 'Xác minh thành công!',
+    'Please click': 'Vui lòng chọn',
+    'Please enter the correct mobile number': 'Vui lòng nhập đúng số điện thoại',
+    'Please enter the correct account': 'Tài khoản gồm 3–15 ký tự: chữ, số hoặc dấu gạch dưới',
+    'Please enter the correct password': 'Mật khẩu gồm 6–32 ký tự hợp lệ',
+    'Please enter the correct name': 'Vui lòng nhập đúng họ tên',
+    'Content cannot be empty': 'Nội dung không được để trống',
+    'Floating point number': 'Số thập phân', required: 'Trường bắt buộc',
+    'editor required': 'Nội dung không được để trống',
+    'Please enter the correct ID number': 'Vui lòng nhập đúng số giấy tờ',
+    number: 'Số', integer: 'Số nguyên', float: 'Số thập phân',
+}
